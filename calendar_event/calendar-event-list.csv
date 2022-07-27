@@ -1,0 +1,71 @@
+Id,Start,Name,Impact,Currency
+924b4f4b-7785-4d63-9d43-fadfd262131c,07/25/2022 07:00:00,FDI - Foreign Direct Investment (YTD) (YoY),MEDIUM,CNY
+858f33fa-b355-4087-a8cc-a9cd68581f4c,07/25/2022 08:00:00,IFO – Business Climate,MEDIUM,EUR
+3dad1b39-0557-4205-9b60-dc8f023caf8e,07/25/2022 08:00:00,IFO – Current Assessment,MEDIUM,EUR
+f8a9a335-ee1c-419b-a239-8a7f8096ef57,07/25/2022 22:24:00,IFO – Expectations,MEDIUM,EUR
+1141eb8f-2ec6-480b-b8ee-0dade8dc0cba,07/25/2022 21:55:00,"Chicago Fed National Activity Index ",MEDIUM,USD
+5c9fbc7b-f2ac-42a0-8979-a3ba9d75dd2a,07/25/2022 23:50:00,BoJ Monetary Policy Meeting Minutes,HIGH,JPY
+e800da6b-61a2-4b2d-b26c-b8a27ac9664e,07/26/2022 13:00:00,Housing Price Index (MoM),MEDIUM,USD
+2ec7605f-13ae-4c0c-be7b-35fe10b1653f,07/26/2022 13:00:00,S&P/Case-Shiller Home Price Indices (YoY),MEDIUM,USD
+891a28f8-9891-4ad1-8416-eea8a6999815,07/26/2022 14:00:00,Consumer Confidence,MEDIUM,USD
+ba9e2451-c67e-47ee-863d-bc484a8a45ad,07/26/2022 14:00:00,New Home Sales (MoM),MEDIUM,USD
+2273be2e-a3b1-4ae9-87c3-0a69f3abeaf7,07/27/2022 01:30:00,Consumer Price Index (QoQ),HIGH,AUD
+0569201e-e0b2-4672-abce-862b839684e7,07/27/2022 01:30:00,Consumer Price Index (YoY),MEDIUM,AUD
+4d0779b8-c6d8-4e51-8a43-c956dacfbdef,07/27/2022 01:30:00,RBA Trimmed Mean CPI (QoQ),HIGH,AUD
+d71c1d53-bffd-45dd-901b-64b2f5a16364,07/27/2022 06:00:00,Gfk Consumer Confidence Survey,MEDIUM,EUR
+9bf6582f-bf90-43a6-929c-0d51c655a7f6,07/27/2022 08:00:00,ZEW Survey – Expectations,MEDIUM,CHF
+c68ef136-d5af-43b7-b30b-db4565d6e408,07/27/2022 09:30:00,10-y Bond Auction,MEDIUM,EUR
+8d03f109-9eb7-4bcc-a40c-99beba37f0af,07/27/2022 12:30:00,Durable Goods Orders,HIGH,USD
+f29cf398-98ff-4bf5-a63c-c0673fd3d242,07/27/2022 12:30:00,Durable Goods Orders ex Defense,MEDIUM,USD
+6d8d8523-6bdd-4c2d-81cc-3d45a22cb8b4,07/27/2022 12:30:00,Durable Goods Orders ex Transportation,MEDIUM,USD
+e4b74544-edc0-4ba7-b72a-58bbef2760ab,07/27/2022 12:30:00,Nondefense Capital Goods Orders ex Aircraft,HIGH,USD
+add25577-0317-4603-bd72-30702328f86f,07/27/2022 14:00:00,Pending Home Sales (MoM),MEDIUM,USD
+8758cc99-0cff-4adc-af12-1e749fbc6fa0,07/27/2022 18:00:00,Fed Interest Rate Decision,HIGH,USD
+671994d3-e6f5-4a02-ad5b-1637ba613830,07/27/2022 18:00:00,Fed's Monetary Policy Statement,HIGH,USD
+a85d1d5c-286a-490a-a2ec-a08795e4d88f,07/27/2022 18:30:00,FOMC Press Conference,HIGH,USD
+9d3af8d3-d9e8-4ab0-9fb8-9150bbeac505,07/28/2022 01:30:00,Retail Sales s.a. (MoM),HIGH,AUD
+ae43ee5c-370a-4d7b-b4ef-45f9479eb997,07/28/2022 09:00:00,Business Climate,MEDIUM,EUR
+af811f95-212a-4a4d-941d-243025fe5512,07/28/2022 09:00:00,Consumer Confidence,MEDIUM,EUR
+0853fdc0-72f5-4874-84a6-3da53888880b,07/28/2022 12:00:00,Harmonized Index of Consumer Prices (YoY),HIGH,EUR
+dad69a37-89f2-4ee6-a2a2-94a545947c91,07/28/2022 12:30:00,Core Personal Consumption Expenditures (QoQ),MEDIUM,USD
+2e51ce2d-ab00-4bbe-85e8-fbeb9ce177a1,07/28/2022 12:30:00,Gross Domestic Product Annualized,HIGH,USD
+aa8e6a99-b02f-44d6-a328-93c6157ed436,07/28/2022 12:30:00,Gross Domestic Product Price Index,MEDIUM,USD
+24aca162-ee21-4ec0-978a-36c1fd2b9b21,07/28/2022 12:30:00,Initial Jobless Claims,MEDIUM,USD
+5aeea1a8-a3b8-4398-9c30-c5e6dbd1f17c,07/28/2022 12:30:00,Initial Jobless Claims 4-week average,MEDIUM,USD
+460b01bd-b838-4581-9f5d-b13c5411cbe0,07/28/2022 12:30:00,Personal Consumption Expenditures Prices (QoQ),MEDIUM,USD
+c89e4c33-8fe1-4430-a62a-d3435a1fb2d3,07/28/2022 22:00:00,ANZ – Roy Morgan Consumer Confidence,MEDIUM,NZD
+af190b84-c428-422b-86bd-a232b1bf78d1,07/28/2022 23:30:00,Jobs / Applicants Ratio,MEDIUM,JPY
+cecbff84-1e7b-4bcd-9984-a6a75d90cad1,07/28/2022 23:30:00,Tokyo Consumer Price Index (YoY),MEDIUM,JPY
+359a0d51-e3bb-4b8c-9c57-95a9f5251633,07/28/2022 23:30:00,"Tokyo CPI ex Food, Energy (YoY)",MEDIUM,JPY
+d17407eb-feea-4418-8954-516cc064df44,07/28/2022 23:30:00,Tokyo CPI ex Fresh Food (YoY),MEDIUM,JPY
+a0d39b94-e59a-429a-bfca-a27d303a5ae4,07/28/2022 23:30:00,Unemployment Rate,MEDIUM,JPY
+fb2e14de-5f72-46fd-bd42-b9bedf3c3b1a,07/28/2022 23:50:00,Industrial Production (MoM),MEDIUM,JPY
+e302d164-dcb5-4099-ba3d-b742b1becdf2,07/28/2022 23:50:00,Industrial Production (YoY),MEDIUM,JPY
+991d526e-3e0a-49dc-9d62-7d75271fd3e7,07/28/2022 23:50:00,Large Retailer Sales,MEDIUM,JPY
+7720ef0d-b5ad-4e05-aaca-f223fd5665dc,07/28/2022 23:50:00,Retail Trade (YoY),MEDIUM,JPY
+b52be874-e12e-411e-bfdf-d3ae7f58e149,07/28/2022 23:50:00,Retail Trade s.a (MoM),MEDIUM,JPY
+9479d507-6be7-47a5-8566-e874baed24e4,07/29/2022 05:30:00,Gross Domestic Product (QoQ),MEDIUM,EUR
+2aac23b4-9222-467d-87b1-def02400db03,07/29/2022 06:30:00,Real Retail Sales (YoY),MEDIUM,CHF
+c8078731-7c82-4def-b5d7-949ecd6e26f9,07/29/2022 07:00:00,KOF Leading Indicator,MEDIUM,CHF
+59783cb4-94d0-4c4b-9067-6d766a4a40cc,07/29/2022 07:55:00,Unemployment Change,MEDIUM,EUR
+48b7b21a-9ed4-4e7c-9e93-9abf58ebd776,07/29/2022 07:55:00,Unemployment Rate s.a.,MEDIUM,EUR
+d53ba7af-404d-431c-90b4-2f19c88764ca,07/29/2022 08:00:00,Gross Domestic Product (QoQ),MEDIUM,EUR
+cee141ee-d4b6-4594-94ee-cfa48bb8ccc2,07/29/2022 08:00:00,Gross Domestic Product (YoY),MEDIUM,EUR
+b4e7b055-dd05-464b-9325-ac50fb6929fe,07/29/2022 08:00:00,Gross Domestic Product (QoQ),HIGH,EUR
+ae4646b3-a806-4169-b78a-9b9f94c6c638,07/29/2022 08:00:00,Gross Domestic Product (YoY),MEDIUM,EUR
+7032aa49-b2ab-49c6-82e3-c84c69f12d5a,07/29/2022 08:00:00,Gross Domestic Product w.d.a (YoY),MEDIUM,EUR
+218b111e-3e7b-4c4b-9810-5fde47038537,07/29/2022 09:00:00,Gross Domestic Product s.a. (QoQ),HIGH,EUR
+001d924e-d35c-4ab0-8e22-bc3db32d74ae,07/29/2022 09:00:00,Gross Domestic Product s.a. (YoY),HIGH,EUR
+8cf56134-3c4a-4fb0-8421-f6beb468ffaa,07/29/2022 09:00:00,HICP (YoY),HIGH,EUR
+927cde67-3f92-4237-b97c-fee5340e9aa4,07/29/2022 09:00:00,"HICP-X F,E,A,T (YoY)",HIGH,EUR
+f65a94f1-6d14-43ca-882b-7a72b01345c2,07/29/2022 12:30:00,Core Personal Consumption Expenditures - Price Index (MoM),MEDIUM,USD
+64555ca4-f847-4b82-ab71-3960eab2b660,07/29/2022 12:30:00,Core Personal Consumption Expenditures - Price Index (YoY),MEDIUM,USD
+efa57c6d-f28a-425a-897c-acb1bfe1723d,07/29/2022 12:30:00,Personal Income (MoM),MEDIUM,USD
+be164ff9-e239-4e0b-95bf-d52a7abd88b9,07/29/2022 12:30:00,Personal Spending,MEDIUM,USD
+d7253a43-1fe2-4ed9-a6a3-b06c4ff92d89,07/29/2022 12:30:00,Gross Domestic Product (MoM),MEDIUM,CAD
+0d5b46e8-d2f6-4439-9f05-8146ea438bde,07/29/2022 13:45:00,Chicago Purchasing Managers' Index,MEDIUM,USD
+5542b26c-2822-4a61-9f76-2cbb3ca11fc0,07/29/2022 14:00:00,Michigan Consumer Sentiment Index,MEDIUM,USD
+d34fa668-389a-405a-a000-4d2ebbd95ec2,07/31/2022 01:00:00,NBS Manufacturing PMI,HIGH,CNY
+b24f130a-399a-4d0a-8f9b-fbc997c1372d,07/31/2022 01:00:00,Non-Manufacturing PMI,HIGH,CNY
+a84504da-3c5c-4d4c-8e0e-768b512d3f37,07/31/2022 22:30:00,AiG Performance of Mfg Index,MEDIUM,AUD
+a14e3182-5df4-4af3-a4a8-151a639f6f2e,07/31/2022 22:45:00,Building Permits s.a. (MoM),MEDIUM,NZD
