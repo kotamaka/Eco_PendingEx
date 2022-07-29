@@ -57,8 +57,12 @@ position = mt.positions_get()
 #symbol = "XAUUSDm"
 def price(symbol):
     point = mt.symbol_info(symbol).point
-    price_pd_buy_stop = mt.symbol_info_tick(symbol).ask+1000*point
-    price_pd_sell_stop = mt.symbol_info_tick(symbol).ask-1000*point
+    if(symbol=="XAUUSDm"):
+        price_pd_buy_stop = mt.symbol_info_tick(symbol).ask+1000*point
+        price_pd_sell_stop = mt.symbol_info_tick(symbol).ask-1000*point
+    else:
+        price_pd_buy_stop = mt.symbol_info_tick(symbol).ask+100*point
+        price_pd_sell_stop = mt.symbol_info_tick(symbol).ask-100*point
     return price_pd_buy_stop,price_pd_sell_stop
 
 def sendOrderBuyStop(symbol,lots,price,sl,tp,magic,comment):

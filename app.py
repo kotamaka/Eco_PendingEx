@@ -2,9 +2,17 @@ from datetime import datetime
 from datetime import timedelta
 import datetime,time
 import secret
-import csv,login
+import csv,login,requests
 
 #test_time = '07/22/2022 13:45:00'
+def PushMessgeOnly(result):
+    
+    host = 'https://notify-api.line.me/api/notify'
+    
+    headers = {'content-type':'application/x-www-form-urlencoded','Authorization':'Bearer '+secret.Token_notify}
+    r = requests.post(host, headers=headers, data={'message':result})
+    print(r.text)
+    return 200
 
 def MyTime():
     now = datetime.datetime.now()
@@ -51,8 +59,9 @@ def app():
                 MagicNumber = 10008
             if row[1] == MyTime() and login.ordersTotal()<2:
                 print('Send Order successful at {}'.format(row[1]))
-                login.sendOrderBuyStop(sym,secret.Lots,login.price(sym)[0],secret.StopLoss,secret.TakeProfit,MagicNumber,"Eco BuyStop")
-                login.sendOrderSellStop(sym,secret.Lots,login.price(sym)[1],secret.StopLoss,secret.TakeProfit,MagicNumber,"Eco SellStop")
+                login.sendOrderBuyStop(sym,secret.Lots,login.price(sym)[0],secret.StopLoss,secret.TakeProfit,MagicNumber,"Eco Impact : {}".format(row[3]))
+                login.sendOrderSellStop(sym,secret.Lots,login.price(sym)[1],secret.StopLoss,secret.TakeProfit,MagicNumber,"Eco Impact : {}".format(row[3]))
+                #PushMessgeOnly('Send Order successful at {}'.format(row[1]))
                 time.sleep(60)
             else:
                 print('{} != {}'.format(row[1],MyTime()))
