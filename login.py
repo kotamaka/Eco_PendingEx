@@ -2,6 +2,7 @@ import MetaTrader5 as mt
 import pandas as pd
 import plotly.express as px
 from datetime import datetime
+import time
 
 from requests import request
 import secret
@@ -21,9 +22,15 @@ login_number = account_info.login
 balance = account_info.balance
 equity = account_info.equity
 
-print('Login Number is : ',login_number)
+print('Welcome to Eco_PendingEx')
+EnablePending = input('EnablePendong?<Y/N>')
+time.sleep(3)
+print('Login Successful..')
+print('Account Number is : ',login_number)
 print('Balance is : ',balance)
 print('Equity is : ',equity)
+
+
 
 num_symbols = mt.symbols_total()
 
@@ -103,10 +110,51 @@ def sendOrderSellStop(symbol,lots,price,sl,tp,magic,comment):
     print(result)
     return result
 
-
 #sendOrderBuyStop(secret.Symbol,secret.Lots,secret.StopLoss,secret.TakeProfit,secret.MagicNumber,"Test send")
 #sendOrderSellStop(secret.Symbol,secret.Lots,secret.StopLoss,secret.TakeProfit,secret.MagicNumber,"Test send")
 
+#-----------------------------------
+def OP_BUY(symbol,lots,sl,tp,magic,comment):
+    request = {
+        "action": mt.TRADE_ACTION_DEAL,
+        "symbol": symbol,
+        "volume": lots,
+        "type": mt.ORDER_TYPE_BUY,
+        "price": mt.symbol_info_tick(symbol).ask,
+        "sl": sl,
+        "tp": tp,
+        "deviation": 5,
+        "magic": magic,
+        "comment": comment,
+        #"type_time": mt.ORDER_TIME_GTC,
+        #"type_filling": mt.ORDER_FILLING_IOC,
+        }
+    result = mt.order_send(request)
+    print(result)
+    return result
+
+def OP_SELL(symbol,lots,sl,tp,magic,comment):
+    request = {
+        "action": mt.TRADE_ACTION_DEAL,
+        "symbol": symbol,
+        "volume": lots,
+        "type": mt.ORDER_TYPE_SELL,
+        "price": mt.symbol_info_tick(symbol).bid,
+        "sl": sl,
+        "tp": tp,
+        "deviation": 5,
+        "magic": magic,
+        "comment": comment,
+        #"type_time": mt.ORDER_TIME_GTC,
+        #"type_filling": mt.ORDER_FILLING_IOC,
+        }
+    result = mt.order_send(request)
+    print(result)
+    return result
+
+#OP_BUY("EURUSDm",secret.Lots,secret.StopLoss,secret.TakeProfit,secret.MagicNumber,"Test send")
+#OP_SELL(secret.Symbol,secret.Lots,secret.StopLoss,secret.TakeProfit,secret.MagicNumber,"Test send")
+#-----------------------------------
 def closeOrder(): #close by position
     request = {
         "action": mt.TRADE_ACTION_DEAL,

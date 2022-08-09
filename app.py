@@ -36,33 +36,52 @@ def app():
             if row[4]=='USD' or row[4]=='CNY': 
                 sym = secret.Symbol 
                 MagicNumber = 10001
+                OrderType = 'OP_SELL'
             if row[4]=='EUR' : 
                 sym = 'EURUSDm'
                 MagicNumber = 10002
+                OrderType = 'OP_SELL'
             if row[4]=='GBP' : 
                 sym = 'GBPUSDm'
                 MagicNumber = 10003
+                OrderType = 'OP_SELL'
             if row[4]=='AUD' : 
                 sym = 'AUDUSDm'
                 MagicNumber = 10004
+                OrderType = 'OP_SELL'
             if row[4]=='CAD' : 
                 sym = 'USDCADm'
                 MagicNumber = 10005
+                OrderType = 'OP_BUY'
             if row[4]=='JPY' : 
                 sym = 'USDJPYm'
                 MagicNumber = 10006
+                OrderType = 'OP_BUY'
             if row[4]=='CHF' : 
                 sym = 'USDCHFm'
                 MagicNumber = 10007
+                OrderType = 'OP_BUY'
             if row[4]=='NZD' : 
                 sym = 'NZDUSDm'
                 MagicNumber = 10008
-            if row[1] == MyTime() and login.ordersTotal()<2:
+                OrderType = 'OP_SELL'
+            if row[1] == MyTime() and login.ordersTotal()<2 and login.EnablePending=="y":
                 print('Send Order successful at {}'.format(row[1]))
-                login.sendOrderBuyStop(sym,secret.Lots,login.price(sym)[0],secret.StopLoss,secret.TakeProfit,MagicNumber,"Eco Impact : {}".format(row[3]))
-                login.sendOrderSellStop(sym,secret.Lots,login.price(sym)[1],secret.StopLoss,secret.TakeProfit,MagicNumber,"Eco Impact : {}".format(row[3]))
+                login.sendOrderBuyStop(sym,secret.Lots,login.price(sym)[0],secret.StopLoss,secret.TakeProfit,MagicNumber,"Impact : {}".format(row[3]))
+                login.sendOrderSellStop(sym,secret.Lots,login.price(sym)[1],secret.StopLoss,secret.TakeProfit,MagicNumber,"Impact : {}".format(row[3]))
                 #PushMessgeOnly('Send Order successful at {}'.format(row[1]))
                 time.sleep(60)
+            if row[1] == MyTime() and login.ordersTotal()<2 and login.EnablePending!="y":
+                if OrderType=='OP_BUY':
+                    print('Send Order successful at {}'.format(row[1]))
+                    login.OP_BUY(sym,secret.Lots,secret.StopLoss,secret.TakeProfit,MagicNumber,"Impact : {}".format(row[3]))
+                    #PushMessgeOnly('Send Order successful at {}'.format(row[1]))
+                    time.sleep(60)
+                if OrderType=='OP_SELL':
+                    print('Send Order successful at {}'.format(row[1]))
+                    login.OP_SELL(sym,secret.Lots,secret.StopLoss,secret.TakeProfit,MagicNumber,"Impact : {}".format(row[3]))
+                    #PushMessgeOnly('Send Order successful at {}'.format(row[1]))
+                    time.sleep(60)
             else:
                 print('{} != {}'.format(row[1],MyTime()))
         #time.sleep(1)
