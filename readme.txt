@@ -6,3 +6,5 @@ pip install requests
 
 
 import : https://www.fxstreet.com/economic-calendar
+
+#THIS BOT RUN ON FOREX MARKET
