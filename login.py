@@ -21,14 +21,16 @@ account_info = mt.account_info()
 login_number = account_info.login
 balance = account_info.balance
 equity = account_info.equity
+company = account_info.company
 
 print('Welcome to Eco_PendingEx')
-EnablePending = input('EnablePendong?<Y/N>')
-time.sleep(3)
+EnablePending = input('EnablePending?<y/n>')
+time.sleep(2)
 print('Login Successful..')
-print('Account Number is : ',login_number)
-print('Balance is : ',balance)
-print('Equity is : ',equity)
+print('Account Number : ',login_number)
+print('Balance : ',balance)
+print('Equity : ',equity)
+print('Company : ',company)
 
 
 
@@ -61,8 +63,9 @@ orderstotal = mt.positions_total()
 position = mt.positions_get()
 #print(position[0][0])
 
-#symbol = "XAUUSDm"
-def price(symbol):
+#symbol = "EURUSDm"
+#point = mt.symbol_info(symbol).point
+def PriceStop(symbol):
     point = mt.symbol_info(symbol).point
     if(symbol=="XAUUSDm"):
         price_pd_buy_stop = mt.symbol_info_tick(symbol).ask+1000*point
@@ -71,6 +74,45 @@ def price(symbol):
         price_pd_buy_stop = mt.symbol_info_tick(symbol).ask+100*point
         price_pd_sell_stop = mt.symbol_info_tick(symbol).ask-100*point
     return price_pd_buy_stop,price_pd_sell_stop
+
+def PriceLimit(symbol):
+    point = mt.symbol_info(symbol).point
+    if(symbol=="XAUUSDm"):
+        price_pd_buy_limit = mt.symbol_info_tick(symbol).ask-1000*point
+        price_pd_sell_limit = mt.symbol_info_tick(symbol).ask+1000*point
+    else:
+        price_pd_buy_limit = mt.symbol_info_tick(symbol).ask-100*point
+        price_pd_sell_limit = mt.symbol_info_tick(symbol).ask+100*point
+    return price_pd_buy_limit,price_pd_sell_limit
+
+def SL_BUYSTOP(symbol):
+    point = mt.symbol_info(symbol).point
+    if(symbol=="XAUUSDm"):
+        sl = PriceStop(symbol)[0]-secret.StopLoss*point*100
+    else:
+        sl = PriceStop(symbol)[0]-secret.StopLoss*point*10
+    return sl
+def SL_SELLSTOP(symbol):
+    point = mt.symbol_info(symbol).point
+    if(symbol=="XAUUSDm"):
+        sl = PriceStop(symbol)[1]+secret.StopLoss*point*100
+    else:
+        sl = PriceStop(symbol)[1]+secret.StopLoss*point*10
+    return sl
+'''def SL_BUYLIMIT(symbol):
+    if(symbol=="XAUUSDm"):
+        sl = PriceLimit(symbol)[0]-secret.StopLoss*point*100
+    else:
+        sl = PriceLimit(symbol)[0]-secret.StopLoss*point*10
+    return sl
+def SL_SELLLIMIT(symbol):
+    if(symbol=="XAUUSDm"):
+        sl = PriceLimit(symbol)[1]+secret.StopLoss*point*100
+    else:
+        sl = PriceLimit(symbol)[1]+secret.StopLoss*point*10
+    return sl'''
+
+#print(PriceLimit(symbol)[0],SL_BUYSTOP(symbol))
 
 def sendOrderBuyStop(symbol,lots,price,sl,tp,magic,comment):
     request = {
@@ -113,6 +155,43 @@ def sendOrderSellStop(symbol,lots,price,sl,tp,magic,comment):
 #sendOrderBuyStop(secret.Symbol,secret.Lots,secret.StopLoss,secret.TakeProfit,secret.MagicNumber,"Test send")
 #sendOrderSellStop(secret.Symbol,secret.Lots,secret.StopLoss,secret.TakeProfit,secret.MagicNumber,"Test send")
 
+def sendOrderBuyLimit(symbol,lots,price,sl,tp,magic,comment):
+    request = {
+        "action": mt.TRADE_ACTION_PENDING,
+        "symbol": symbol,
+        "volume": lots,
+        "type": mt.ORDER_TYPE_BUY_LIMIT,
+        "price": price,
+        "sl": sl,
+        "tp": tp,
+        "deviation": 20,
+        "magic": magic,
+        "comment": comment,
+        "type_time": mt.ORDER_TIME_GTC,
+        "type_filling": mt.ORDER_FILLING_IOC,
+        }
+    result = mt.order_send(request)
+    print(result)
+    return result
+
+def sendOrderSellLimit(symbol,lots,price,sl,tp,magic,comment):
+    request = {
+        "action": mt.TRADE_ACTION_PENDING,
+        "symbol": symbol,
+        "volume": lots,
+        "type": mt.ORDER_TYPE_SELL_LIMIT,
+        "price": price,
+        "sl": sl,
+        "tp": tp,
+        "deviation": 20,
+        "magic": magic,
+        "comment": comment,
+        "type_time": mt.ORDER_TIME_GTC,
+        "type_filling": mt.ORDER_FILLING_IOC,
+        }
+    result = mt.order_send(request)
+    print(result)
+    return result
 #-----------------------------------
 def OP_BUY(symbol,lots,sl,tp,magic,comment):
     request = {

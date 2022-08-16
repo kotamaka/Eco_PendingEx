@@ -161,10 +161,10 @@ void CreateButtonBuyStop(){
    ObjectCreate(0,"BuyStop",OBJ_BUTTON,0,0,0);
    ObjectSetInteger(0,"BuyStop",OBJPROP_XDISTANCE,10);
    ObjectSetInteger(0,"BuyStop",OBJPROP_YDISTANCE,40);
-   ObjectSetInteger(0,"BuyStop",OBJPROP_XSIZE,120);
-   ObjectSetInteger(0,"BuyStop",OBJPROP_YSIZE,40);
+   ObjectSetInteger(0,"BuyStop",OBJPROP_XSIZE,90);
+   ObjectSetInteger(0,"BuyStop",OBJPROP_YSIZE,20);
    
-   ObjectSetInteger(0,"BuyStop",OBJPROP_FONTSIZE,8);
+   ObjectSetInteger(0,"BuyStop",OBJPROP_FONTSIZE,7);
    ObjectSetInteger(0,"BuyStop",OBJPROP_BGCOLOR,clrLime);
    ObjectSetInteger(0,"BuyStop",OBJPROP_COLOR,clrWhite);
 }
@@ -172,23 +172,47 @@ void CreateButtonBuyStop(){
 void CreateButtonSellStop(){
    ObjectCreate(0,"SellStop",OBJ_BUTTON,0,0,0);
    ObjectSetInteger(0,"SellStop",OBJPROP_XDISTANCE,10);
-   ObjectSetInteger(0,"SellStop",OBJPROP_YDISTANCE,90);
-   ObjectSetInteger(0,"SellStop",OBJPROP_XSIZE,120);
-   ObjectSetInteger(0,"SellStop",OBJPROP_YSIZE,40);
+   ObjectSetInteger(0,"SellStop",OBJPROP_YDISTANCE,60);
+   ObjectSetInteger(0,"SellStop",OBJPROP_XSIZE,90);
+   ObjectSetInteger(0,"SellStop",OBJPROP_YSIZE,20);
    
-   ObjectSetInteger(0,"SellStop",OBJPROP_FONTSIZE,8);
+   ObjectSetInteger(0,"SellStop",OBJPROP_FONTSIZE,7);
    ObjectSetInteger(0,"SellStop",OBJPROP_BGCOLOR,clrRed);
    ObjectSetInteger(0,"SellStop",OBJPROP_COLOR,clrWhite);
+}
+
+void CreateButtonBuyLimit(){
+   ObjectCreate(0,"BuyLimit",OBJ_BUTTON,0,0,0);
+   ObjectSetInteger(0,"BuyLimit",OBJPROP_XDISTANCE,10);
+   ObjectSetInteger(0,"BuyLimit",OBJPROP_YDISTANCE,80);
+   ObjectSetInteger(0,"BuyLimit",OBJPROP_XSIZE,90);
+   ObjectSetInteger(0,"BuyLimit",OBJPROP_YSIZE,20);
+   
+   ObjectSetInteger(0,"BuyLimit",OBJPROP_FONTSIZE,7);
+   ObjectSetInteger(0,"BuyLimit",OBJPROP_BGCOLOR,clrLime);
+   ObjectSetInteger(0,"BuyLimit",OBJPROP_COLOR,clrWhite);
+}
+
+void CreateButtonSellLimit(){
+   ObjectCreate(0,"SellLimit",OBJ_BUTTON,0,0,0);
+   ObjectSetInteger(0,"SellLimit",OBJPROP_XDISTANCE,10);
+   ObjectSetInteger(0,"SellLimit",OBJPROP_YDISTANCE,100);
+   ObjectSetInteger(0,"SellLimit",OBJPROP_XSIZE,90);
+   ObjectSetInteger(0,"SellLimit",OBJPROP_YSIZE,20);
+   
+   ObjectSetInteger(0,"SellLimit",OBJPROP_FONTSIZE,7);
+   ObjectSetInteger(0,"SellLimit",OBJPROP_BGCOLOR,clrRed);
+   ObjectSetInteger(0,"SellLimit",OBJPROP_COLOR,clrWhite);
 }
 
 void CreateButtonCloseAll(){
    ObjectCreate(0,"CloseAll",OBJ_BUTTON,0,0,0);
    ObjectSetInteger(0,"CloseAll",OBJPROP_XDISTANCE,10);
-   ObjectSetInteger(0,"CloseAll",OBJPROP_YDISTANCE,140);
-   ObjectSetInteger(0,"CloseAll",OBJPROP_XSIZE,120);
-   ObjectSetInteger(0,"CloseAll",OBJPROP_YSIZE,40);
+   ObjectSetInteger(0,"CloseAll",OBJPROP_YDISTANCE,120);
+   ObjectSetInteger(0,"CloseAll",OBJPROP_XSIZE,90);
+   ObjectSetInteger(0,"CloseAll",OBJPROP_YSIZE,20);
    
-   ObjectSetInteger(0,"CloseAll",OBJPROP_FONTSIZE,8);
+   ObjectSetInteger(0,"CloseAll",OBJPROP_FONTSIZE,7);
    ObjectSetInteger(0,"CloseAll",OBJPROP_BGCOLOR,clrGray);
    ObjectSetInteger(0,"CloseAll",OBJPROP_COLOR,clrWhite);
 }
@@ -197,6 +221,8 @@ void ChackAuto(){
      {
       ObjectSetString(0,"BuyStop",OBJPROP_TEXT,"Open Order BuyStop");
       ObjectSetString(0,"SellStop",OBJPROP_TEXT,"Open Order SellStop");
+      ObjectSetString(0,"BuyLimit",OBJPROP_TEXT,"Open Order BuyLimit");
+      ObjectSetString(0,"SellLimit",OBJPROP_TEXT,"Open Order SellLimit");
       ObjectSetString(0,"CloseAll",OBJPROP_TEXT,"Close All");
      }
      else{
@@ -241,6 +267,9 @@ void OnTick()
 {
 CreateButtonBuyStop();
 CreateButtonSellStop();
+CreateButtonBuyLimit();
+CreateButtonSellLimit();
+
 CreateButtonCloseAll();
 ChackAuto();
 
@@ -279,7 +308,7 @@ trade.SetExpertMagicNumber(MagicNumber);
              {
               if(OrderGetInteger(ORDER_TYPE)==ORDER_TYPE_BUY_STOP)
                 {
-                   if(SymbolInfoDouble(_Symbol,SYMBOL_BID)-OrderGetDouble(ORDER_PRICE_OPEN)<MyPoint*Distance&&dt_sturuct.sec>=58)
+                   if(dt_sturuct.sec>=58)
                     {
                     if(_Symbol=="XAUUSDm"){
                        trade.OrderModify(m_ticket,SymbolInfoDouble(_Symbol,SYMBOL_BID)+(0.1*Distance),lower(),0,ORDER_TIME_GTC,NULL,0);
@@ -292,12 +321,26 @@ trade.SetExpertMagicNumber(MagicNumber);
                       }
                     }
                 }
+              if(OrderGetInteger(ORDER_TYPE)==ORDER_TYPE_BUY_LIMIT)
+                {
+                  if(dt_sturuct.sec>=58)
+                  //if(SymbolInfoDouble(_Symbol,SYMBOL_BID)<SymbolInfoDouble(_Symbol,SYMBOL_ASK))  
+                    {
+                    if(_Symbol=="XAUUSDm"){
+                       trade.OrderModify(m_ticket,SymbolInfoDouble(_Symbol,SYMBOL_BID)-(0.1*(Distance*2)),lower(),0,ORDER_TIME_GTC,NULL,0);
+                       return;
+                    }else{
+                       trade.OrderModify(m_ticket,SymbolInfoDouble(_Symbol,SYMBOL_BID)-(Distance*2)*MyPoint,lower(),0,ORDER_TIME_GTC,NULL,0);
+                       return;
+                      }
+                    }
+                }
              }
             if(OrderSelect(m_ticket) && OrderGetInteger(ORDER_MAGIC)==MagicNumber)
               {
                if(OrderGetInteger(ORDER_TYPE)==ORDER_TYPE_SELL_STOP)
                 {
-                   if(OrderGetDouble(ORDER_PRICE_OPEN)-SymbolInfoDouble(_Symbol,SYMBOL_ASK)<MyPoint*Distance&&dt_sturuct.sec<=2)
+                   if(dt_sturuct.sec<=2)
                     {
                     if(_Symbol=="XAUUSDm"){
                        //Sleep(9);
@@ -311,12 +354,27 @@ trade.SetExpertMagicNumber(MagicNumber);
                
                     }
                 }
+               if(OrderGetInteger(ORDER_TYPE)==ORDER_TYPE_SELL_LIMIT)
+                {
+                  if(dt_sturuct.sec<=2)
+                  //if(SymbolInfoDouble(_Symbol,SYMBOL_BID)<SymbolInfoDouble(_Symbol,SYMBOL_ASK))    
+                    {
+                    if(_Symbol=="XAUUSDm"){
+                       trade.OrderModify(m_ticket,SymbolInfoDouble(_Symbol,SYMBOL_ASK)+(0.1*(Distance*2)),higher(),0,ORDER_TIME_GTC,NULL,0);
+                       return;
+                    }else{
+                       trade.OrderModify(m_ticket,SymbolInfoDouble(_Symbol,SYMBOL_ASK)+(Distance*2)*MyPoint,higher(),0,ORDER_TIME_GTC,NULL,0);
+                       return;
+                    }
+               
+                    }
+                }
               }
            //Sleep(15);
            }
                     
        }
-      if(PositionsTotal()>0 || TimeCurrent(dt_sturuct)>=TimeToString(OrderGetInteger(ORDER_TIME_SETUP)+ClosePending_Sec))
+      if(PositionsTotal()>0 && TimeCurrent(dt_sturuct)>=TimeToString(OrderGetInteger(ORDER_TIME_SETUP)+ClosePending_Sec))
        {
          for(int i = OrdersTotal() - 1; i >= 0; i--) // loop all orders available
          if(m_order.SelectByIndex(i))  // select an order
@@ -382,12 +440,22 @@ void OnChartEvent(const int id,const long& lparam,const double& dparam,const str
        if(sparam=="BuyStop")
          {
           Comment(sparam+" was pressed OrderTotal : "+PositionsTotal());
-          trade.BuyStop(Lots,(Ask+Distance*MyPoint),_Symbol,0,0,ORDER_TIME_GTC,0,NULL);
+          trade.BuyStop(Lots,higher(),_Symbol,0,0,ORDER_TIME_GTC,0,NULL);
          }
        if(sparam=="SellStop")
          {
           Comment(sparam+" was pressedOrderTotal : "+PositionsTotal());
-          trade.SellStop(Lots,(Bid-Distance*MyPoint),_Symbol,0,0,ORDER_TIME_GTC,0,NULL);
+          trade.SellStop(Lots,lower(),_Symbol,0,0,ORDER_TIME_GTC,0,NULL);
+         }
+        if(sparam=="BuyLimit")
+         {
+          Comment(sparam+" was pressed OrderTotal : "+PositionsTotal());
+          trade.BuyLimit(Lots,lower(),_Symbol,0,0,ORDER_TIME_GTC,0,NULL);
+         }
+       if(sparam=="SellLimit")
+         {
+          Comment(sparam+" was pressedOrderTotal : "+PositionsTotal());
+          trade.SellLimit(Lots,higher(),_Symbol,0,0,ORDER_TIME_GTC,0,NULL);
          }
        if(sparam=="CloseAll")
          {

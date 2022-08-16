@@ -11,4 +11,4 @@ MagicNumber = 10001
 Symbol = 'XAUUSDm'
 Lots = 0.1
 TakeProfit = 0.0
-StopLoss = 0.0
+StopLoss = 30

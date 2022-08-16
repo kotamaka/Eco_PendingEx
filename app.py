@@ -27,7 +27,7 @@ def DeleyTime():
     after_date_time = open.strftime("%m/%d/%Y %H:%M:%S")
     
     return after_date_time
-
+r = 0
 def app():
     with open('./calendar_event/calendar-event-list.csv') as csvfile:
         reader = csv.reader(csvfile)
@@ -66,27 +66,37 @@ def app():
                 MagicNumber = 10008
                 OrderType = 'OP_SELL'
             if row[1] == MyTime() and login.ordersTotal()<2 and login.EnablePending=="y":
-                print('Send Order successful at {}'.format(row[1]))
-                login.sendOrderBuyStop(sym,secret.Lots,login.price(sym)[0],secret.StopLoss,secret.TakeProfit,MagicNumber,"Impact : {}".format(row[3]))
-                login.sendOrderSellStop(sym,secret.Lots,login.price(sym)[1],secret.StopLoss,secret.TakeProfit,MagicNumber,"Impact : {}".format(row[3]))
-                #PushMessgeOnly('Send Order successful at {}'.format(row[1]))
-                time.sleep(60)
+                if row[3] == "LOW":
+                    print('Send Order successful at {}'.format(row[1]))
+                    login.sendOrderBuyLimit(sym,secret.Lots,login.PriceLimit(sym)[0],login.SL_BUYSTOP(sym),secret.TakeProfit,MagicNumber,"Impact : {}".format(row[3]))
+                    login.sendOrderSellLimit(sym,secret.Lots,login.PriceLimit(sym)[1],login.SL_SELLSTOP(sym),secret.TakeProfit,MagicNumber,"Impact : {}".format(row[3]))
+                    PushMessgeOnly('\nSend Order successful! \nAt {}\nImpact : {}'.format(row[1],row[3]))
+                    time.sleep(60)
+                else:
+                    print('Send Order successful at {}'.format(row[1]))
+                    login.sendOrderBuyStop(sym,secret.Lots,login.PriceStop(sym)[0],login.SL_BUYSTOP(sym),secret.TakeProfit,MagicNumber,"Impact : {}".format(row[3]))
+                    login.sendOrderSellStop(sym,secret.Lots,login.PriceStop(sym)[1],login.SL_SELLSTOP(sym),secret.TakeProfit,MagicNumber,"Impact : {}".format(row[3]))
+                    PushMessgeOnly('\nSend Order successful! \nAt {}\nImpact : {}'.format(row[1],row[3]))
+                    time.sleep(60)
             if row[1] == MyTime() and login.ordersTotal()<2 and login.EnablePending!="y":
                 if OrderType=='OP_BUY':
                     print('Send Order successful at {}'.format(row[1]))
                     login.OP_BUY(sym,secret.Lots,secret.StopLoss,secret.TakeProfit,MagicNumber,"Impact : {}".format(row[3]))
                     #PushMessgeOnly('Send Order successful at {}'.format(row[1]))
                     time.sleep(60)
+                    r = 0
+                    return r
                 if OrderType=='OP_SELL':
                     print('Send Order successful at {}'.format(row[1]))
                     login.OP_SELL(sym,secret.Lots,secret.StopLoss,secret.TakeProfit,MagicNumber,"Impact : {}".format(row[3]))
                     #PushMessgeOnly('Send Order successful at {}'.format(row[1]))
                     time.sleep(60)
+                    r = 0
+                    return r
             else:
                 print('{} != {}'.format(row[1],MyTime()))
         #time.sleep(1)
 if __name__=='__main__':
-    r = 0
     while True :
         app()
         print('Round : {}'.format(r))
